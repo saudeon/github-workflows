@@ -1,0 +1,20 @@
+name: Check PR Title
+on:
+  pull_request:
+    types:
+      # Check title when opened.
+      - opened
+      # Check title when new commits are pushed.
+      # Required to use as a status check.
+      - synchronize
+      # Check when title is edited.
+      - edited
+
+jobs:
+  title-check:
+    runs-on: ubuntu-latest
+    name: PR Title Check
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/title-lint
